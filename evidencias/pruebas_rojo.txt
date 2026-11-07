@@ -1,0 +1,56 @@
+Etapa 1 — pruebas antes de implementar (ejecución real)
+Comando: python -m pytest -q
+Código de salida: 1
+
+scuento: str) -> Decimal:
+        """Pendiente: implementación posterior a las pruebas."""
+>       raise NotImplementedError("Funcionalidad aún no implementada")
+E       NotImplementedError: Funcionalidad aún no implementada
+
+tienda.py:7: NotImplementedError
+______________ test_tipos_invalidos_generan_type_error[100-1-10] _______________
+
+precio = '100', cantidad = 1, descuento = 10
+
+    @pytest.mark.parametrize("precio,cantidad,descuento", [
+        (100, 1, "0"),
+        ("100", 1.5, "0"),
+        ("100", True, "0"),
+        ("100", 1, 10),
+    ])
+    def test_tipos_invalidos_generan_type_error(precio, cantidad, descuento):
+        with pytest.raises(TypeError):
+>           calcular_total(precio, cantidad, descuento)
+
+test_tienda.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+precio = '100', cantidad = 1, descuento = 10
+
+    def calcular_total(precio: str, cantidad: int, descuento: str) -> Decimal:
+        """Pendiente: implementación posterior a las pruebas."""
+>       raise NotImplementedError("Funcionalidad aún no implementada")
+E       NotImplementedError: Funcionalidad aún no implementada
+
+tienda.py:7: NotImplementedError
+=========================== short test summary info ============================
+FAILED test_tienda.py::test_compra_con_descuento_normal - NotImplementedError: Funcionalidad aún no implementada
+FAILED test_tienda.py::test_compra_sin_descuento - NotImplementedError: Funcionalidad aún no implementada
+FAILED test_tienda.py::test_descuento_cien_por_ciento - NotImplementedError: Funcionalidad aún no implementada
+FAILED test_tienda.py::test_precio_cero - NotImplementedError: Funcionalidad aún no implementada
+FAILED test_tienda.py::test_redondeo_mitad_hacia_arriba - NotImplementedError: Funcionalidad aún no implementada
+FAILED test_tienda.py::test_redondeo_solo_al_final - NotImplementedError: Funcionalidad aún no implementada
+FAILED test_tienda.py::test_cantidad_minima_uno - NotImplementedError: Funcionalidad aún no implementada
+FAILED test_tienda.py::test_valores_invalidos_generan_value_error[-10.00-1-0] - NotImplementedError: Funcionalidad aún no implementada
+FAILED test_tienda.py::test_valores_invalidos_generan_value_error[100-0-0] - NotImplementedError: Funcionalidad aún no implementada
+FAILED test_tienda.py::test_valores_invalidos_generan_value_error[100-1-101] - NotImplementedError: Funcionalidad aún no implementada
+FAILED test_tienda.py::test_valores_invalidos_generan_value_error[100-1--1] - NotImplementedError: Funcionalidad aún no implementada
+FAILED test_tienda.py::test_valores_invalidos_generan_value_error[abc-1-0] - NotImplementedError: Funcionalidad aún no implementada
+FAILED test_tienda.py::test_valores_invalidos_generan_value_error[NaN-1-0] - NotImplementedError: Funcionalidad aún no implementada
+FAILED test_tienda.py::test_valores_invalidos_generan_value_error[Infinity-1-0] - NotImplementedError: Funcionalidad aún no implementada
+FAILED test_tienda.py::test_tipos_invalidos_generan_type_error[100-1-0] - NotImplementedError: Funcionalidad aún no implementada
+FAILED test_tienda.py::test_tipos_invalidos_generan_type_error[100-1.5-0] - NotImplementedError: Funcionalidad aún no implementada
+FAILED test_tienda.py::test_tipos_invalidos_generan_type_error[100-True-0] - NotImplementedError: Funcionalidad aún no implementada
+FAILED test_tienda.py::test_tipos_invalidos_generan_type_error[100-1-10] - NotImplementedError: Funcionalidad aún no implementada
+18 failed in 0.15s
+

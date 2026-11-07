@@ -1,0 +1,3 @@
+e252554 test: pruebas HU02 inicialmente en rojo
+48d3898 feat: implementar calculo de total y pasar pruebas
+77b6084 refactor: extraer validacion de entradas sin cambiar pruebas

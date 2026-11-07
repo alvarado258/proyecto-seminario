@@ -1,0 +1,6 @@
+Etapa 2 — implementación (ejecución real)
+Comando: python -m pytest -q
+
+..................                                                       [100%]
+18 passed in 0.05s
+
