@@ -1,13 +1,16 @@
-"""Cálculo de compras de una tienda local (HU02)."""
+"""Cálculo de compras de una tienda local (HU01/HU02)."""
 import argparse
 from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
 
+CENTAVO = Decimal("0.01")
+PORCENTAJE_TOTAL = Decimal("100")
 
-def calcular_total(precio: str, cantidad: int, descuento: str) -> Decimal:
-    """Calcula el total con descuento y redondeo monetario."""
+
+def validar_entrada(precio: str, cantidad: int, descuento: str) -> dict:
+    """Valida y normaliza los tres datos de una compra (HU01)."""
     if not isinstance(precio, str) or not isinstance(descuento, str):
         raise TypeError("Precio y descuento deben ser textos decimales")
-    if type(cantidad) is not int:
+    if type(cantidad) is not int:  # bool es int en Python; aquí no se acepta.
         raise TypeError("Cantidad debe ser un entero")
     try:
         precio_decimal = Decimal(precio)
@@ -20,10 +23,18 @@ def calcular_total(precio: str, cantidad: int, descuento: str) -> Decimal:
         raise ValueError("El precio no puede ser negativo")
     if cantidad < 1:
         raise ValueError("La cantidad debe ser al menos 1")
-    if not (0 <= descuento_decimal <= 100):
+    if not (0 <= descuento_decimal <= PORCENTAJE_TOTAL):
         raise ValueError("El descuento debe estar entre 0 y 100")
-    total = precio_decimal * cantidad * (1 - descuento_decimal / 100)
-    return total.quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+    return {"precio": precio_decimal, "cantidad": cantidad,
+            "descuento": descuento_decimal}
+
+
+def calcular_total(precio: str, cantidad: int, descuento: str) -> Decimal:
+    """Obtiene el total descontado, redondeado una sola vez al final (HU02)."""
+    datos = validar_entrada(precio, cantidad, descuento)
+    subtotal = datos["precio"] * datos["cantidad"]
+    factor_descuento = 1 - datos["descuento"] / PORCENTAJE_TOTAL
+    return (subtotal * factor_descuento).quantize(CENTAVO, rounding=ROUND_HALF_UP)
 
 
 def main() -> int:
