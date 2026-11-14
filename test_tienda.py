@@ -57,3 +57,8 @@ def test_valores_invalidos_generan_value_error(precio, cantidad, descuento):
 def test_tipos_invalidos_generan_type_error(precio, cantidad, descuento):
     with pytest.raises(TypeError):
         calcular_total(precio, cantidad, descuento)
+
+
+def test_total_fuera_de_precision_genera_value_error():
+    with pytest.raises(ValueError, match="El total supera la precisión disponible"):
+        calcular_total("1e28", 1, "0")

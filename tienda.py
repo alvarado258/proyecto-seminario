@@ -1,6 +1,6 @@
 """Cálculo de compras de una tienda local (HU01/HU02)."""
 import argparse
-from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
+from decimal import Decimal, DecimalException, InvalidOperation, ROUND_HALF_UP
 
 CENTAVO = Decimal("0.01")
 PORCENTAJE_TOTAL = Decimal("100")
@@ -30,12 +30,20 @@ def validar_entrada(precio: str, cantidad: int, descuento: str) -> dict:
 
 
 def calcular_total(precio: str, cantidad: int, descuento: str) -> Decimal:
-    """Obtiene el total descontado, redondeado una sola vez al final (HU02)."""
-    datos = validar_entrada(precio, cantidad, descuento)
-    subtotal = datos["precio"] * datos["cantidad"]
-    factor_descuento = 1 - datos["descuento"] / PORCENTAJE_TOTAL
-    return (subtotal * factor_descuento).quantize(CENTAVO, rounding=ROUND_HALF_UP)
+    """Devuelve el total de la compra redondeado a dos decimales.
 
+    Recibe el precio y el descuento como textos decimales y la cantidad
+    como entero. Lanza TypeError si los tipos son incorrectos y ValueError
+    si algún valor es inválido o el cálculo supera la precisión disponible.
+    """
+    datos = validar_entrada(precio, cantidad, descuento)
+    try:
+        subtotal = datos["precio"] * datos["cantidad"]
+        factor_descuento = 1 - datos["descuento"] / PORCENTAJE_TOTAL
+        total = subtotal * factor_descuento
+        return total.quantize(CENTAVO, rounding=ROUND_HALF_UP)
+    except DecimalException as error:
+        raise ValueError("El total supera la precisión disponible") from error
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Calcular total de compra")
