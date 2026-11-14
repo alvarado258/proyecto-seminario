@@ -28,6 +28,13 @@ def validar_entrada(precio: str, cantidad: int, descuento: str) -> dict:
     return {"precio": precio_decimal, "cantidad": cantidad,
             "descuento": descuento_decimal}
 
+    """Valida el precio, la cantidad y el descuento de una compra.
+
+    Recibe precio y descuento como textos decimales y cantidad como entero.
+    Devuelve un diccionario con el precio y el descuento como Decimal y la
+    cantidad como int. Lanza TypeError por tipos incorrectos y ValueError
+    por valores inválidos o fuera de rango.
+    """
 
 def calcular_total(precio: str, cantidad: int, descuento: str) -> Decimal:
     """Devuelve el total de la compra redondeado a dos decimales.

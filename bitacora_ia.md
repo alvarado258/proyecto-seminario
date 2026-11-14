@@ -70,3 +70,21 @@ La implementación posterior pasó los casos previstos sin cambiar las pruebas.
 Separar la validación del cálculo hizo que el código resultara más fácil de explicar.  
 Rechacé añadir un servidor porque no hacía falta para esta primera entrega.  
 En la siguiente funcionalidad prepararía primero más casos de integración y los informes JSON.
+
+## Semana 6 — 14 de noviembre de 2026
+
+### 1. Revisión del código con IA
+Usé ChatGPT para revisar la validación y el cálculo. Reproduje el fallo
+con precio `1e28`, cantidad `1` y descuento `0`. La versión original
+lanzaba `decimal.InvalidOperation` al redondear.
+
+### 2. Corrección y prueba de regresión
+Con apoyo de ChatGPT convertí el fallo decimal en un `ValueError`
+que la consola puede mostrar. Agregué una prueba para `1e28` y
+verifiqué que pasaron las 19 pruebas. Commit `62c0836`.
+
+### 3. Configuración de Ruff y auditoría
+Consulté a ChatGPT por los siete avisos S101. Revisé que los `assert`
+estaban en las pruebas y limité la excepción a `test_tienda.py`.
+Ruff pasó y `pip-audit` no encontró vulnerabilidades conocidas en
+las dependencias revisadas. Commit `316145c`.
