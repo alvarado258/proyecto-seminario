@@ -88,3 +88,11 @@ Consulté a ChatGPT por los siete avisos S101. Revisé que los `assert`
 estaban en las pruebas y limité la excepción a `test_tienda.py`.
 Ruff pasó y `pip-audit` no encontró vulnerabilidades conocidas en
 las dependencias revisadas. Commit `316145c`.
+
+## Semana 7 — Uso de IA en las pruebas
+
+| Actividad | Qué consulté | Qué verifiqué |
+|---|---|---|
+| Diseño de casos | Pedí ayuda para elegir los límites del descuento y de la cantidad. | Calculé los resultados esperados a mano. Para el descuento de `99.99 %`, confirmé que queda por pagar `0.20` sobre un subtotal de `2000.00`. |
+| Escritura de pruebas | Pedí ayuda con `pytest.mark.parametrize`, `pytest.raises` y las pruebas de consola. | Ejecuté los 11 casos de Semana 7 y comprobé que las pruebas detectaron los tres errores introducidos a propósito. |
+| Datos sintéticos | Pedí ayuda para reutilizar una compra ficticia mediante un fixture. | Usé `compra_sintetica` con un precio de `1000.00` y una cantidad de `2`, lo que me permitió comprobar los totales a mano. |
